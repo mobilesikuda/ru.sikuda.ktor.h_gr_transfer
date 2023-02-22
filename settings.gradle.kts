@@ -1,0 +1,1 @@
+rootProject.name = "ru.sikuda.ktor.h_gr_transfer"
