@@ -8,10 +8,13 @@ import ru.sikuda.ktor.routes.*
 fun Application.configureRouting() {
     routing {
         customTaskRouting()
+        customFotoRouting()
         get("/") {
             call.respondText("Hello OTUS workwork!")
         }
     }
 }
+
+
 
 

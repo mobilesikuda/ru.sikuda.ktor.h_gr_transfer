@@ -2,15 +2,31 @@ package ru.sikuda.ktor.models
 
 import kotlinx.serialization.Serializable
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 @Serializable
-data class CustomTask(val id: String, val date: String, val comment: String)
-
-val customTaskStorage = mutableListOf<CustomTask>(
-    CustomTask("1","2023-02-22", "one"),
-    CustomTask("2","2023-02-23", "two"),
-    CustomTask("3","2023-02-24", "three"),
-    CustomTask("4","2023-02-25", "four")
+data class CustomTask(
+    val date: String,
+    val comment: String,
+    var listPhotos: Map<String, CustomPhoto>
 )
+
+@Serializable
+data class CustomPhoto(
+    //val id: String,
+    val idTask: String?,
+    val data: String,
+    val comment: String
+)
+
+val customTaskStorage = mutableMapOf<String, CustomTask>(
+    Pair(UUID.randomUUID().toString(), CustomTask( dateTest(), "one task", mapOf())),
+    Pair(UUID.randomUUID().toString(), CustomTask( dateTest(), "two task", mapOf())),
+    Pair(UUID.randomUUID().toString(), CustomTask( dateTest(), "three task", mapOf())),
+    Pair(UUID.randomUUID().toString(), CustomTask( dateTest(), "four task", mapOf()))
+)
+
+fun dateTest(): String = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
 
 
