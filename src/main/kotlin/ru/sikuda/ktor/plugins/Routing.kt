@@ -10,7 +10,7 @@ fun Application.configureRouting() {
         customTaskRouting()
         customFotoRouting()
         get("/") {
-            call.respondText("Hello OTUS workwork!")
+            call.respondText("Hello OTUS project work!")
         }
     }
 }

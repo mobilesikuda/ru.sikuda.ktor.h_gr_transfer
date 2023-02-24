@@ -35,8 +35,8 @@ fun Route.customTaskRouting() {
         post {
             //silence is gold
             //try {
-            val customer = call.receive<CustomTask>()
-            customTaskStorage.put(UUID.randomUUID().toString(), customer)
+            val customTask = call.receive<CustomTask>()
+            customTaskStorage[UUID.randomUUID().toString()] = customTask
             call.respondText("Customer stored correctly", status = HttpStatusCode.Created)
             //} catch (e: BadRequestException) {
             //    call.respondText("Bad request", status = HttpStatusCode.BadRequest)

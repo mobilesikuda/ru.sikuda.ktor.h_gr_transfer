@@ -6,7 +6,7 @@ import io.ktor.server.netty.*
 import ru.sikuda.ktor.plugins.*
 
 fun main() {
-    embeddedServer(Netty, port = 8081, host = "localhost", module = Application::module)
+    embeddedServer(Netty, port = 8085, host = "localhost", module = Application::module)
         .start(wait = true)
 }
 

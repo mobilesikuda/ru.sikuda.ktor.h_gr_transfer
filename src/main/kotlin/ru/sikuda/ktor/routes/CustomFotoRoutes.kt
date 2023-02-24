@@ -22,28 +22,28 @@ fun Route.customFotoRouting() {
                     "No custom task with id $id",
                     status = HttpStatusCode.NotFound
                 )
-            call.respond(customer.listPhotos)
+            call.respond(customer.mapPhotos)
         }
-        //add foto to id task
+        //add photo to id task
         post("{id?}") {
             val id = call.parameters["id"] ?: return@post call.respondText(
                 "Missing id",
                 status = HttpStatusCode.BadRequest
             )
             val customFoto = call.receive<CustomPhoto>()
-            customTaskStorage.get(id).also { task ->
-                val mapPhotos = task?.listPhotos?.toMutableMap() ?: mutableMapOf()
-                mapPhotos.put(UUID.randomUUID().toString(), customFoto)
-                task?.listPhotos = mapPhotos.toMap()
+            customTaskStorage[id].also { task ->
+                val mapPhotos = task?.mapPhotos?.toMutableMap() ?: mutableMapOf()
+                mapPhotos[UUID.randomUUID().toString()] = customFoto
+                task?.mapPhotos = mapPhotos.toMap()
             }
         }
         delete("{idtask?\\id?}") {
             val id = call.parameters["id"] ?: return@delete call.respond(HttpStatusCode.BadRequest)
             val idtask = call.parameters["idtask"] ?: return@delete call.respond(HttpStatusCode.BadRequest)
-            customTaskStorage.get(idtask).also { task ->
-                val mapPhotos = task?.listPhotos?.toMutableMap() ?: mutableMapOf()
+            customTaskStorage[idtask].also { task ->
+                val mapPhotos = task?.mapPhotos?.toMutableMap() ?: mutableMapOf()
                 mapPhotos.remove(id)
-                task?.listPhotos = mapPhotos.toMap()
+                task?.mapPhotos = mapPhotos.toMap()
             }
 
         }

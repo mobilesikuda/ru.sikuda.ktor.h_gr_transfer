@@ -9,7 +9,7 @@ import java.util.*
 data class CustomTask(
     val date: String,
     val comment: String,
-    var listPhotos: Map<String, CustomPhoto>
+    var mapPhotos: Map<String, CustomPhoto>
 )
 
 @Serializable
